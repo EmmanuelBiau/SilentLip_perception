@@ -22,9 +22,9 @@ This repository contains the codes used in a project investigating how the visua
 # Getting started
 
 - Download the .zip and unzip or clone to your favourite path.
-- Make sure you Matlab path is set to include the code (Set path on Matlab's Home tab).
+- Make sure your Matlab, Fieldtrip and CircStat toolboxes,as well as data folders paths toolboxes are set.
 - Walk through the example scripts.
-- Try it on your own data (NOTE: your data will have to organised as a FieldTrip data struct).
+- Try it on your own data.
 
 # License and disclaimer
 
