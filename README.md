@@ -16,7 +16,6 @@ This repository contains the codes used in a project investigating how the visua
 
 - Matlab (The MathWorks) - The code has been tested on Matlab R2018a.
 - Fieltrip toolbox.
-- Psychotoolbox Toolbox for Matlab.
 - Circular Statistics toolbox for Matlab.
 
 # Getting started
