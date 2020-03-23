@@ -1,0 +1,7 @@
+This folder contains:
+- the calibration task used to determine the individual SNR for the following TDT;
+- The Tone detection Task (TDT);
+- The stimuli (silent movies);
+- The white noise;
+- Two additional script to test the sound and the flicker used to control for stimulus presentation timing with a photodiode;
+- Trigger sender functions;
