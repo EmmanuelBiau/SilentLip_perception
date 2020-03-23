@@ -1,1 +1,7 @@
 Here are the codes to compute the Mutual Information spectrum between the lips movements and the auditory envelope time-series. 
+The main steps are explicited with sections in the codes as following:
+- resample the lips signals at 250 Hz;
+- compute the audio envelope of the corresponding video and resample at 250 Hz (you will need to extract the audio track from the video 
+  separately and save it in .wav before to be read by Matlab).
+- compute the MI spectrum between the lips and envelope time-series for every stimuli;
+- detect the frequency with the peak of MI between the two signals in the spectrum; plot it and sort it;
