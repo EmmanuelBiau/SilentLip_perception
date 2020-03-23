@@ -1,5 +1,5 @@
 This is the code to present the 60 silent movies randomly with the EEG trigger time-locked to video onset;
-The videos are in the folder "videos" in the TDT folder.
+The videos are in the folder "videos" in the Stimuli folder.
 
 # TASK INSTRUCTIONS:
 
