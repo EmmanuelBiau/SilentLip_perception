@@ -1,6 +1,6 @@
 In this folder, you will find the codes to extract the time-series of the lips movements from the video.
 The video format has to be .mp4 to be read by matlab. No need for sound track.
 The 3 main steps are explicited by separate sections in the code:
-- Import the video- read a frame to select the lips zone;
-- Convert the coordinates in the excel converter then copy them in the Matlab interactive window;
-- Filter the video frames and detect the lips information - save the lips data (Stat_video_XXX) and a video of the marked lips.
+- Import the video - read a frame to select the lips zone;
+- Convert the coordinates of the lips zone in the excel converter then copy them in the Matlab interactive window;
+- Filter the video frames and detect the lips information - save the lips data (Stat_video_XXX) and a video of the marked lips ("lip stick").
