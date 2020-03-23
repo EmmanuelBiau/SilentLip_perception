@@ -1,2 +1,13 @@
 This is the code to present the 60 silent movies randomly with the EEG trigger time-locked to video onset;
 The videos are in the folder "videos" in the TDT folder.
+
+# TASK INSTRUCTIONS:
+
+In this task, you will watch silent movies of speakers taken from interviews.You will have to attend carefully to the video. After the video presentation, 
+you will have to rate from 1 to 5 how emotional was the video content:
+ 
+You will press [1], [2], [3], [4] or [5] keys to rate the emotional content of the video: 
+
+[1] meaning the speaker’s face conveyed neutral content and [5] meaning a very emotional content instead (e.g. anger). 
+
+After you respond, the next trial starts.
