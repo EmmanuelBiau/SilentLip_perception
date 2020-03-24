@@ -142,7 +142,7 @@ for i = 1:numel(source_movie_data_cut2)
 end
 
 cd(['XXX\subj',num2str(s)]) 
-save(['subj',num2str(s),'_movie_source'],'eeg_source_movies','miss_movies','source_movie_data_cut');
+save(['subj',num2str(s),'_source_movie_cut'],'eeg_source_movies','miss_movies','source_movie_data_cut');
 
 clearvars -except subjects
 
@@ -164,7 +164,7 @@ subjects = [2:9 11:17 19:26];
 for s = subjects 
 
 cd(['XXX\subj',num2str(s)])    
-load(['subj',num2str(s),'_movie_source']);  
+load(['subj',num2str(s),'_source_movie_cut']);  
 
 %Now we calculate the MI between Movies and source epochs; Load your lips signal here;
 stim_info_dir = 'XXX\AV_info_stimuli\';
