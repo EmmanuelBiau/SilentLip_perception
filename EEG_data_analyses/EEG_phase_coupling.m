@@ -245,6 +245,7 @@ set(gcf,'color','w','Position', [2200 536 892 390]);
 
 %% Plot Vector length entrainment to zeros in T1 and T2 conditions;
 
+%Inputs for raincloud plots;
 dat = gavar_T1_T2(:,1:2);          
 col = [0 0 0];                        
 dotsize = 15;                              
@@ -281,7 +282,7 @@ set(gcf,'color','w','Positio',[674 546 329 420]);
    
 %% Convert the mean distance phase-coupling to zeros in time;
 cd XXX\;
-load video_info;
+load video_info; %This contains the same info of the simuli used for the MI calculations (i.e. stim_freqpeak);
 
 %mean frequency across stimuli;
 mean_Fq = mean(Stim_infos.FREQPEAK);
