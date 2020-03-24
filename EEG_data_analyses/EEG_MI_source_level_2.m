@@ -39,7 +39,7 @@ end
 
 %% Realign the MI_source on FreqPeak for each participant (Freqpeak = frequency in which the MI peaks between lips and audio envelope signals, see stimuli analyses);
 clearvars; clc; cd XXX\; 
-load ('stim_freqpeak.mat'); %this matrix contains the list of the 60 videos and their frequency of MI peak between lips and sound;
+load ('stim_freqpeak.mat'); %this matrix contains the list of the 60 videos and their frequency of MI peak between lips and sound (in AV_info_stimuli folder);
 
 %subject ID;
 subjects = [2:9 11:17 19:26];  
