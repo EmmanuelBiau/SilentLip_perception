@@ -1,14 +1,10 @@
 %Calculate the phase information for every video stimulus (ONCE FOR ALL);
-<<<<<<< HEAD:Mutual Information lips-envelope/Phase_mina.m
 clearvars;clc; 
 addpath XXX\fieldtrip\; addpath XXX\Circular_Statistics_Toolbox\;
 cd XXX\Signal_Infos\;
-=======
 
-clear all;clc; 
-addpath XXX\fieldtrip\
+addpath XXX\fieldtrip\;
 addpath XXX\Circular_Statistics_Toolbox\;
->>>>>>> 6f3b2e035214f4a744d989f3b0906d3a0cbcbb32:Mutual Information lips-envelope/Phase_mina_videos.m
 load ('Stim_signal'); load data_template; 
 
 %structure signal of each video in Fieldtrip structure;
@@ -82,11 +78,7 @@ Phase_mina.trial = [temp_phase_4.trial';temp_phase_5.trial';temp_phase_6.trial';
 clear temp_phase_4 temp_phase_5 temp_phase_6 temp_phase_7 temp_phase_8 temp
 
 %save everything alltogether;
-<<<<<<< HEAD:Mutual Information lips-envelope/Phase_mina.m
 cd XXX\Signal_Infos\;
-=======
-cd XXX\;
->>>>>>> 6f3b2e035214f4a744d989f3b0906d3a0cbcbb32:Mutual Information lips-envelope/Phase_mina_videos.m
 save Phase_mina Phase_mina
 
 %%
