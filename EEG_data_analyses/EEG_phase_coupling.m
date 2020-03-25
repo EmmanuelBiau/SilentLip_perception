@@ -1,7 +1,7 @@
 %Now let's do Phase coupling analysis between the left audio and left visual sources reconstructed (and flipped) signals;
 clearvars;clc; 
 addpath XXX\Circular_Statistics_Toolbox\;addpath XXX\CircHist-master;
-cd XXX\;
+cd XXX;
 
 %subjects ID;
 subjects = [2:9 11:17 19:26];
