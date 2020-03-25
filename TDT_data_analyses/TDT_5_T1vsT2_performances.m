@@ -11,7 +11,7 @@ subjects = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26
 %       Compute the performances for T1/T2 in the One Tone condition;
 %-------------------------------------------------------------------------------------%
 
-clear ONE_TONES_ANALYSES
+clear ONE_TONE_ANALYSES
 count = 0;
 for s = subjects
     
@@ -23,19 +23,19 @@ for s = subjects
     for i = 1:length(one_tone_temp.TONE_POSITION)
         
             count = count+1;
-            ONE_TONES_ANALYSES(count,1) = one_tone_temp.PARTICIPANT(i);
-            ONE_TONES_ANALYSES(count,2) = one_tone_temp.ONSET(i);
+            ONE_TONE_ANALYSES(count,1) = one_tone_temp.PARTICIPANT(i);
+            ONE_TONE_ANALYSES(count,2) = one_tone_temp.ONSET(i);
 
-                if ONE_TONES_ANALYSES(count,2)/44100 <= 2.5
-                    ONE_TONES_ANALYSES(count,3) = 1;
-                elseif ONE_TONES_ANALYSES(count,2)/44100 > 2.5
-                    ONE_TONES_ANALYSES(count,3) = 2;
+                if ONE_TONE_ANALYSES(count,2)/44100 <= 2.5
+                    ONE_TONE_ANALYSES(count,3) = 1;
+                elseif ONE_TONE_ANALYSES(count,2)/44100 > 2.5
+                    ONE_TONE_ANALYSES(count,3) = 2;
                 end
 
-            ONE_TONES_ANALYSES(count,4) = one_tone_temp.THETA_PHASE{i};
-            ONE_TONES_ANALYSES(count,5) = one_tone_temp.FREQPEAK(i);
-            ONE_TONES_ANALYSES(count,6) = one_tone_temp.HIT(i);
-            ONE_TONES_ANALYSES(count,7) = one_tone_temp.REACTION_TIME(i);           
+            ONE_TONE_ANALYSES(count,4) = one_tone_temp.THETA_PHASE{i};
+            ONE_TONE_ANALYSES(count,5) = one_tone_temp.FREQPEAK(i);
+            ONE_TONE_ANALYSES(count,6) = one_tone_temp.HIT(i);
+            ONE_TONE_ANALYSES(count,7) = one_tone_temp.REACTION_TIME(i);           
     
     end
     
@@ -43,7 +43,7 @@ for s = subjects
 
 end
 
-ONE_TONES_ANALYSES = array2table(ONE_TONES_ANALYSES,'Variable',{'PARTICIPANT','OneTone_Onset','OneTone_position','OneTone_phase','Freqpeak','Hit', 'Rt'});
+ONE_TONE_ANALYSES = array2table(ONE_TONE_ANALYSES,'Variable',{'PARTICIPANT','OneTone_Onset','OneTone_position','OneTone_phase','Freqpeak','Hit', 'Rt'});
     
 %compute the CRs and RTs for separate T1/T2 equivalent tones;
 clear hit_sum_oneTone
@@ -52,12 +52,12 @@ s = 0;
 for i = subjects
     
     s = s +1;
-    hit_sum_oneTone(s,1) = sum(ONE_TONES_ANALYSES.Hit(ONE_TONES_ANALYSES.PARTICIPANT == i & ONE_TONES_ANALYSES.OneTone_position == 1))./sum(ONE_TONES_ANALYSES.PARTICIPANT == i & ONE_TONES_ANALYSES.OneTone_position == 1);
-    hit_sum_oneTone(s,2) = sum(ONE_TONES_ANALYSES.Hit(ONE_TONES_ANALYSES.PARTICIPANT == i & ONE_TONES_ANALYSES.OneTone_position == 2))./sum(ONE_TONES_ANALYSES.PARTICIPANT == i & ONE_TONES_ANALYSES.OneTone_position == 2);       
+    hit_sum_oneTone(s,1) = sum(ONE_TONE_ANALYSES.Hit(ONE_TONE_ANALYSES.PARTICIPANT == i & ONE_TONE_ANALYSES.OneTone_position == 1))./sum(ONE_TONE_ANALYSES.PARTICIPANT == i & ONE_TONE_ANALYSES.OneTone_position == 1);
+    hit_sum_oneTone(s,2) = sum(ONE_TONE_ANALYSES.Hit(ONE_TONE_ANALYSES.PARTICIPANT == i & ONE_TONE_ANALYSES.OneTone_position == 2))./sum(ONE_TONE_ANALYSES.PARTICIPANT == i & ONE_TONE_ANALYSES.OneTone_position == 2);       
     hit_sum_oneTone(s,3) = FA_rate.FA_T1_window(i);
     hit_sum_oneTone(s,4) = FA_rate.FA_T2_window(i);  
-    hit_sum_oneTone(s,7) = mean(ONE_TONES_ANALYSES.Rt(ONE_TONES_ANALYSES.PARTICIPANT == i & ONE_TONES_ANALYSES.OneTone_position == 1 & ONE_TONES_ANALYSES.Hit ==1));
-    hit_sum_oneTone(s,8) = mean(ONE_TONES_ANALYSES.Rt(ONE_TONES_ANALYSES.PARTICIPANT == i & ONE_TONES_ANALYSES.OneTone_position == 2 & ONE_TONES_ANALYSES.Hit ==1));    
+    hit_sum_oneTone(s,7) = mean(ONE_TONE_ANALYSES.Rt(ONE_TONE_ANALYSES.PARTICIPANT == i & ONE_TONE_ANALYSES.OneTone_position == 1 & ONE_TONE_ANALYSES.Hit ==1));
+    hit_sum_oneTone(s,8) = mean(ONE_TONE_ANALYSES.Rt(ONE_TONE_ANALYSES.PARTICIPANT == i & ONE_TONE_ANALYSES.OneTone_position == 2 & ONE_TONE_ANALYSES.Hit ==1));    
            
 end
 
@@ -148,6 +148,8 @@ TwoTones_T1vsT2_performances.rt_T2 = hit_sum_twoTones(:,8);
 
 % %save all participants performances;
 % save allsubj_T1vsT2_performances OneTone_T1vsT2_performances TwoTones_T1vsT2_performances 
+% save ONE_TONE_ANALYSES ONE_TONE_ANALYSES;
+% save TWO_TONES_ANALYSES TWO_TONES_ANALYSES
 
 %% Exclude outliers based on Grand averaged performances (i.e. blind to any condition);  
 
