@@ -2,7 +2,7 @@
 clearvars;clc; 
 addpath XXX\fieldtrip\;
 addpath XXX\Circular_Statistics_Toolbox\;
-cd XXX\Signal_Infos\;
+cd XXX\;
 load Stim_signal; load data_template; 
 
 %structure signal of each video in Fieldtrip structure;
@@ -25,6 +25,7 @@ for i=1:length(data_mina.trialinfo)
         temp.trialinfo{i,1}.video_name = Stim_infos.VIDEO_NAME(i);
         temp.trialinfo{i,1}.name_in_task = Stim_infos.NAME_in_task(i);
         temp.trialinfo{i,1}.freqpeak = Stim_infos.FREQPEAK(i);
+
 end
 
 data_mina.trialinfo = temp.trialinfo;
