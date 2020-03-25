@@ -2,7 +2,7 @@
 clear;clc;
 cd XXX\Signal_Infos\;
 addpath XXX\Circular_Statistics_Toolbox\;
-load('Phase_mina');
+load Phase_mina;
 
 subjects = 1:29;
 
@@ -73,6 +73,7 @@ end
 
 clear rt_1 reaction_time onsets video freqpeak participant hits position condition lag 
 
+%save subjects'data;
 cd(['XXX\subj' num2str(s)]);
 save (['subj' num2str(s) '-Phase_analyses'],'PHASE_ANALYSES','alltrials','participant_parameters');
 
