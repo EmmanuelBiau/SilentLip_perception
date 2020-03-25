@@ -1,5 +1,5 @@
 %Now let's do Phase coupling analysis between the left audio and left visual sources reconstructed (and flipped) signals;
-clear;clc; 
+clearvars;clc; 
 addpath XXX\Circular_Statistics_Toolbox\;addpath XXX\CircHist-master;
 cd XXX\;
 
@@ -16,19 +16,18 @@ for s = subjects
     source_audio_left = source_left_audio_realigned; 
     source_visual_left = source_left_visual_realigned;
     
-
     %GRam-Schmidt orthogonality correction;
     for i = 1:length(source_audio_left.trial) 
 
         X = source_visual_left.trial{1,i}; 
         Y = source_audio_left.trial{1,i};
 
-        % project left_audio signal orthogonally onto the line spanned by visual signal.
+        %project left_audio signal orthogonally onto the line spanned by visual signal.
         Yp = (sum(X.*Y )./sum(X.*X ))*X; 
         Yo = Y - Yp;
         source_audio_left_temp.trial{1,i} = Yo;
 
-        % This value should be zero (or very close to zero);
+        %This value should be zero (or very close to zero);
         check_left(i,1)= dot(Yo,X); 
 
         clear X Y Z Yp Zp Yo Zo
@@ -176,9 +175,9 @@ GA_T1_T2 = [];
 GA_T1_T2(1,:) = circ_mean(count_T1);
 GA_T1_T2(2,:) = circ_mean(count_T2);
 
+%Get the mean angle difference in the two Time-windows (degree);
 patience = msgbox('wait a second');
 
-%Get the mean angle difference in the two Time-windows (degree);
 alpha1 = circ_rad2ang(GA_T1_T2(1,:)); 
 alpha2 = circ_rad2ang(GA_T1_T2(2,:));    
 nBins = 500;
@@ -192,13 +191,14 @@ close all; clear mean_alpha1 mean_alpha2 fH subAx1 subAx2;
 %% Plot Phase coupling in T1 and T2 time windows between left audio and left visual in Silent movie condition;
 
 %convert phase radians units in degrees;
-close all;
 alpha1 = circ_rad2ang(GA_T1_T2(1,:)); 
 alpha2 = circ_rad2ang(GA_T1_T2(2,:)); 
 
+%Choose number of bins for plotting;
 nBins = 500;
 
 %T1 Tone;
+close all;
 fH = figure('Visible', 'on');
 subAx1 = subplot(1, 2, 1, polaraxes);
 condition_0 = CircHist(alpha1, nBins, 'parent', subAx1);
@@ -242,7 +242,6 @@ set(gcf,'color','w','Position', [2200 536 892 390]);
 %Test the difference of mean angle between the 2 distributions;
 [pval_kuipt_T1vsT2, k_T1vsT2, K_T1vsT2] = circ_kuipertest(GA_T1_T2(1,:), GA_T1_T2(2,:));
 
-
 %% Plot Vector length entrainment to zeros in T1 and T2 conditions;
 
 %Inputs for raincloud plots;
@@ -279,7 +278,6 @@ plot(x2,y2, 'Color', [0 0 0],'LineWidth',0.5);
 text(1.25,0.745,'*','FontSize', 20,'FontWeight','light');
 set(gcf,'color','w','Positio',[674 546 329 420]);
 
-   
 %% Convert the mean distance phase-coupling to zeros in time;
 cd XXX\;
 load video_info; %This contains the same info of the simuli used for the MI calculations (i.e. stim_freqpeak);

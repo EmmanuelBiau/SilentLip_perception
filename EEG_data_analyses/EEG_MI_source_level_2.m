@@ -12,8 +12,8 @@ cd(['XXX\subj',num2str(s)])
 load (['MI_source_pre_subj_', num2str(s)]);
 load (['MI_source_post_subj_', num2str(s)]);
 %save una copia, non si sa mai;
-save (['MI_source_pre_subj_', num2str(s), '_old'], 'all_MI_source_mina_pre','miss_movies'); 
-save (['MI_source_post_subj_', num2str(s), '_old'], 'all_MI_source_mina_post','miss_movies');                                               
+save(['MI_source_pre_subj_', num2str(s), '_old'], 'all_MI_source_mina_pre','miss_movies'); 
+save(['MI_source_post_subj_', num2str(s), '_old'], 'all_MI_source_mina_post','miss_movies');                                               
 
 for chnl = 1:length(all_MI_source_mina_pre)
 
@@ -28,9 +28,10 @@ for chnl = 1:length(all_MI_source_mina_pre)
 
 end
 
-cd(['XXX\subj',num2str(s)])
-save (['MI_source_pre_subj_', num2str(s)], 'all_MI_source_mina_pre','miss_movies'); 
-save (['MI_source_post_subj_', num2str(s)], 'all_MI_source_mina_post','miss_movies'); 
+%save the new ones;
+cd(['XXX\subj',num2str(s)]);
+save(['MI_source_pre_subj_', num2str(s)], 'all_MI_source_mina_pre','miss_movies'); 
+save(['MI_source_post_subj_', num2str(s)], 'all_MI_source_mina_post','miss_movies'); 
 
 clearvars -except subjects
     
@@ -62,8 +63,8 @@ for chnl = 1:length(all_MI_source_mina_pre)
     end
 end
 
-%Save realigned MI_source info on MI freqpeak (in Movie condition);
-cd(['XXX\subj',num2str(s)])
+%Save realigned MI_source info on MI freqpeak;
+cd(['XXX\subj',num2str(s)]);
 save (['MI_source_pre_subj_', num2str(s), '_peak'],'MI_source_mina_peak_pre','miss_movies');
 save (['MI_source_post_subj_', num2str(s), '_peak'],'MI_source_mina_peak_post','miss_movies');
 
@@ -73,7 +74,6 @@ end
 
 %% Give MI_source a Fieldtrip structure for source localization;
 clearvars; clc;
-
 
 %subject ID;
 subjects = [2:9 11:17 19:26];      
@@ -102,9 +102,9 @@ moviefile(:,3) = moviefile_temp.FREQPEAK;
 clear moviefile_temp;
 
 % Load source data and MI_source of the subject;
-cd(['XXX\subj',num2str(s)])
+cd(['XXX\subj',num2str(s)]);
 load (['MI_source_pre_subj_', num2str(s), '_peak']); load (['MI_source_post_subj_', num2str(s), '_peak']); load (['subj', num2str(s), '_source_movie']);
-cd (['XXX\headmodel_mat\subj',num2str(s)])
+cd(['XXX\headmodel_mat\subj',num2str(s)]);
 load(['subj', num2str(s), '_elec_ft']);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

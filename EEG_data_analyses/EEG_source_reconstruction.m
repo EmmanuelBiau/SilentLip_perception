@@ -18,7 +18,7 @@ load(['subj',num2str(s),'_grid']);
 %load(['subj',num2str(s),'_grid_n']); % <--- if subj3, LOAD grid_n; 
 load(['subj',num2str(s),'_vol']);
 
-%Time-lock the data get common source filters
+%Time-lock the data get common source filters;
 cfg = [];
 cfg.keeptrials = 'yes';
 erp = ft_timelockanalysis(cfg, preproc_data);
@@ -43,19 +43,19 @@ filters = cell2mat(source_tmp.avg.filter(source_tmp.inside)); % keep filters
 
 %Create a data structure for the source data visual;
 source = [];
-source.sampleinfo = preproc_data.sampleinfo; % transfer sample information
-source.time = preproc_data.time;       % transfer time information
-source.trialinfo = preproc_data.trialinfo;  % transfer trial information
+source.sampleinfo = preproc_data.sampleinfo; 
+source.time = preproc_data.time;       
+source.trialinfo = preproc_data.trialinfo;  
 source.fsample = preproc_data.fsample;     
 
-% create labels for each virtual electrode
+%create labels for each virtual electrode;
 for c = 1 : sum(grid.inside)
     label{c,1} = ['S' num2str(c)]; 
 end
 
 source.label = label;
 
-% for each trial, apply filters to the recorded data
+%for each trial, apply filters to the recorded data;
 for j = 1 : numel(preproc_data.trial) 
     source.trial{1,j} = single(filters*preproc_data.trial{1,j}(1:128,:)); 
 end
@@ -81,7 +81,6 @@ source_visual_right = ft_preprocessing(cfg,source);
 % cfg = [];
 % cfg.channel = sum(grid.inside(1:control)); % <--- if subj3, use grid_n; 
 % source_control = ft_preprocessing(cfg,source);
-
 
 %save Data_source for each participant;
 cd XXX;
@@ -127,12 +126,14 @@ for s = subjects
     cfg.lpfilter = 'yes';
     cfg.lpfreq = 30;
     preproc_data = ft_preprocessing(cfg, preproc_data);
+    
     %Movie only ERP;   
     cfg = [];
     cfg.trials = find(cell2mat(cellfun(@(x) isequal(x.condition,2), preproc_data.trialinfo, 'UniformOutput', false))); 
     erp_movie = ft_timelockanalysis(cfg, preproc_data);
 
-    cd (['XXX\subj' num2str(s)]);
+    %save erps at the sources ROIs;
+    cd(['XXX\subj' num2str(s)]);
     save (['ERPs_source_subj' num2str(s)], 'erp_audio_left', 'erp_visual_left', 'erp_visual_right', 'erp_movie');
    
 end
@@ -150,7 +151,8 @@ FLIP_INSPECT = array2table(FLIP_INSPECT, 'Variable',{'PARTICIPANT','uni_vis_ch',
 %Here we make a bit of automatic detection of the visual component; It is supposed to detect the channel with the bigger component but in the following section you can control it visually for each participant and
 %correct it to pick the best channel with the best visual component;
 
-ind_lat_p2 = [0.08 0.12]; %choose the TW containing the visual component;
+%choose the TW containing the visual component;
+ind_lat_p2 = [0.08 0.12]; 
 channel_subject = cell(length(subjects), 1); 
 channel_subject{length(subjects), 1} = [];
 
@@ -172,6 +174,7 @@ for s = subjects
          
 end
 
+%save it;
 cd XXX\;
 save FLIP_INSPECTION FLIP_INSPECT;  
 
@@ -213,7 +216,6 @@ clearvars;clc;
 cd XXX\;
 load FLIP_INSPECTION; 
 
-
 %subject ID;
 subjects = 2; 
 
@@ -221,6 +223,7 @@ subjects = 2;
 s = subjects;
 cd (['XXX\subj' num2str(s)]);
 load (['ERPs_source_subj' num2str(s)]);
+
 %select movie scalp erps;
 cfg = [];
 cfg.channel = FLIP_INSPECT_visual_entrainment.uni_vis_ch{s};
@@ -243,10 +246,11 @@ erp_visual_left.avg = (erp_visual_left.avg - mean(erp_visual_left.avg))./std(erp
 erp_visual_right.avg = (erp_visual_right.avg - mean(erp_visual_right.avg))./std(erp_visual_right.avg);
    
 %Always start inspections with +1 indice to make it easy;
-%if polarity of the ERP at the sourc eis the same as the scalp ERP, flip_xxx = 1; if polarity of the ERP at the source is inversed to the scalp ERP, flip_xxx = -1; 
-flip_la = 1;
-flip_lv = 1;
-flip_rv = 1;
+%If polarity of the ERP at the source is the same as the scalp ERP, flip_xxx = 1; 
+%If polarity of the ERP at the source is inversed to the scalp ERP, flip_xxx = -1; 
+flip_la = 1; %left audio ROI;
+flip_lv = 1; %left visual ROI;
+flip_rv = 1; %right visual ROI;
     
 %plot the signal together with the average scalp ERPs: Play around the parameters to make sure you can determine the right polarity respect to the scalp ERPs for each source ERPs; 
 close all; figure; 
@@ -260,7 +264,6 @@ hold on
 plot(time,erp_uni_vis.avg(:,512:2048), 'LineWidth',3, 'Color', [0 0 0]);
 legend('Audio left','Visual left','Visual right','ERP scalp');
 
-    
 %Once you have determined the polarity of each source ERP, put 1 or -1 in the corresponding cell of the FLIP_INSPECTION table;
 %Then, save (my advice is to save after each subject); 
 cd XXX\;
@@ -268,7 +271,6 @@ FLIP_INSPECT_visual_entrainment.flip_left_audio{s} = flip_la;
 FLIP_INSPECT_visual_entrainment.flip_left_visual{s} = flip_lv;
 FLIP_INSPECT_visual_entrainment.flip_right_visual{s} =flip_rv;
 save FLIP_INSPECTION FLIP_INSPECT;
-
     
 %% Now Flip the source data by 1 or -1 to correct the dipole directionality;
 clearvars;clc;
@@ -281,25 +283,29 @@ subjects = [2:9 11:17 19:26];
 
 for s = subjects
 
-    cd (['XXX\subj' num2str(s)]);
-    load(['source_reconstruction_subj' num2str(s)])
+    cd(['XXX\subj' num2str(s)]);
+    load(['source_reconstruction_subj' num2str(s)]);
     source_left_audio_realigned = source_audio_left;
     source_left_visual_realigned = source_visual_left;
     source_right_visual_realigned = source_visual_left;
     
     for i =1:length(source_left_audio_realigned.trial)
+        
+        %Multiple the eeg data at sources by 1 or -1 according to your flipping correction;
         source_left_audio_realigned.trial{i} = source_left_audio_realigned.trial{i}*FLIP_INSPECT.flip_left_audio{s}; 
         source_left_visual_realigned.trial{i} = source_left_visual_realigned.trial{i}*FLIP_INSPECT.flip_left_visual{s}; 
         source_right_visual_realigned.trial{i} = source_right_visual_realigned.trial{i}*FLIP_INSPECT.flip_right_visual{s};
 
     end
-        
+    
+    %save the corrected source data for phase coupling analysis;   
     save (['source_reconstruction_realigned_subj' num2str(s)], 'source_left_audio_realigned','source_left_visual_realigned','source_right_visual_realigned');      
         
 end
 
 %% Finally, we look at the reconstructed ERPs at the ROI sources before and after the flipping realignment to see any improvement;
-%This is not exact science so maybe sometimes there is not obvious improvement - patience;
+%Just try to make it in the more objective manner and if your hypothesis works, you should have the same pattern in the original and realigned data anyway; 
+%This approach cleans the random dipole polarity a much as possible; This is not exact science so maybe sometimes there is not obvious improvement- patience;
 clearvars;clc;
 cd XXX\;
 load FLIP_INSPECTION; 
@@ -310,6 +316,7 @@ subjects = [2:9 11:17 19:26];
 sc = 0;
 for s = subjects
 
+    %original data;
     cd (['XXX\subj' num2str(s)]);
     load (['ERPs_source_subj' num2str(s)]);
 
@@ -318,14 +325,14 @@ for s = subjects
     erp_before.erp_left_visual{sc,1} = erp_visual_left;
     erp_before.erp_right_visual{sc,1} = erp_visual_right;
     
+    %flip corrected data;
     load (['source_reconstruction_realigned_subj' num2str(s)]);
 
     cfg = [];
     cfg.trials = find(cell2mat(cellfun(@(x) isequal(x.condition,2), source_left_audio_realigned.trialinfo, 'UniformOutput', false))); 
     erp_left_audio_realigned = ft_timelockanalysis(cfg, source_left_audio_realigned);
     erp_left_visual_realigned = ft_timelockanalysis(cfg, source_left_visual_realigned);
-    erp_right_visual_realigned = ft_timelockanalysis(cfg, source_right_visual_realigned);    
-    
+    erp_right_visual_realigned = ft_timelockanalysis(cfg, source_right_visual_realigned);        
     erp_after.erp_left_audio{sc,1} = erp_left_audio_realigned;
     erp_after.erp_left_visual{sc,1} = erp_left_visual_realigned;
     erp_after.erp_right_visual{sc,1} = erp_right_visual_realigned;
@@ -333,17 +340,18 @@ for s = subjects
 
 end    
 
-%Grande average of ERps before re-aligning (reflip); 
+%Grande average of ERps before realigning; 
 cfg = [];
 GA_before_left_audio = ft_timelockgrandaverage(cfg,erp_before.erp_left_audio{:});
 GA_before_left_visual = ft_timelockgrandaverage(cfg,erp_before.erp_left_visual{:});
 GA_before_right_visual = ft_timelockgrandaverage(cfg,erp_before.erp_right_visual{:});
-%Grande average of ERps after re-aligning (reflip); 
+%Grande average of ERps after realigning; 
 cfg = [];
 GA_after_left_audio = ft_timelockgrandaverage(cfg,erp_after.erp_left_audio{:});
 GA_after_left_visual = ft_timelockgrandaverage(cfg,erp_after.erp_left_visual{:});
 GA_after_right_visual = ft_timelockgrandaverage(cfg,erp_after.erp_right_visual{:});
-    
+
+%Now Plot the ERPs before and after the flipping correction at the sources;
 cfg = [];
 close all;
 cfg.preproc.lpfilter = 'yes';
@@ -352,11 +360,9 @@ cfg.linewidth = 1;
 figure; ft_singleplotER(cfg, GA_before_left_audio, GA_after_left_audio);
 legend('before realigned','after');
 title('ERP Left Audio - S1743');
-
 figure; ft_singleplotER(cfg, GA_before_left_visual, GA_after_left_visual);
 legend('before realigned','after');
 title('ERP Left Visual  - 1639');
-
 figure; ft_singleplotER(cfg, GA_before_right_visual);
 legend('before realigned','after');
 title('ERP Right Visual - 1947');

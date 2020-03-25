@@ -34,20 +34,20 @@ cfg = [];
 cfg.parameter = 'powspctrm';
 GA_source_mina = ft_freqgrandaverage(cfg,allsource_MI_mina{:});
 
-% Load mri template from FT and the grid template from one participant (e.g. subj2);
+%Load mri template from FT and the grid template from one participant (e.g. subj2);
 cd XXX\fieldtrip\template\headmodel;
 load standard_mri;
 cd XXX\headmodel_mat\subj2\;
 load subj2_grid;
 
-% Using template grid;
+%Using template grid;
 sourceTmpl = [];
 sourceTmpl.inside = grid.inside;
 sourceTmpl.dim = grid.dim;
 sourceTmpl.pos = grid.pos;
 sourceTmpl.unit = grid.unit;
 
-% Apply this source 'template' to sound and movie data and mask the data;
+%Apply this source 'template' to sound and movie data and mask the data;
 %mask the left hemisphere (auditory source detection;
 xa = 0;
 yl = 7;
@@ -79,27 +79,25 @@ no_mask_T2vsT1.powspctrm(sourceTmpl.inside)= GA_source_mina.powspctrm;
 
 %Interpolate the parameter 'pow';
 cfg = [];
-cfg.downsample = 2; % downsample the MRI resolution by 2 (i.e. half the resolution)
+cfg.downsample = 2; 
 cfg.parameter = 'powspctrm';
 left_audio_int_T2vsT1 = ft_sourceinterpolate(cfg, left_audio_T2vsT1, mri); 
 left_visual_int_T2vsT1 = ft_sourceinterpolate(cfg, left_visual_T2vsT1, mri); 
 right_visual_int_T2vsT1 = ft_sourceinterpolate(cfg, right_visual_T2vsT1, mri); 
 no_mask_int_T2vsT1 = ft_sourceinterpolate(cfg, no_mask_T2vsT1, mri); 
 
-
 %Plot source localizations in masked regions of interest and find the greatest voxel manually (without atlas);
+close all;
 atlas = ft_read_atlas('XXX\fieldtrip\template\atlas\aal\ROI_MNI_V4.nii');
 cfg = [];
-cfg.method = 'slice';                   % specify the slice plot
-cfg.funparameter = 'powspctrm';         % specify the functional parameter, i.e. your power spectrum
-cfg.funcolorlim = 'maxabs';             % to plot only positive values, use 'zeromax'; for negative values, use 'minzero'
-cfg.maskparameter = 'powspctrm';        % mask values that are not of interest;
+cfg.method = 'slice';                   
+cfg.funparameter = 'powspctrm';         
+cfg.funcolorlim = 'maxabs';             
+cfg.maskparameter = 'powspctrm';        
 cfg.opacitylim =  'zeromax'; 
-cfg.funcolormap = 'jet'; %colormap(brewermap([],'*RdBu'));
+cfg.funcolormap = 'jet'; 
 cfg.atlas = atlas;
 cfg.location = 'max';
-%no-mask;
-close all;
 ft_sourceplot(cfg, left_audio_int_T2vsT1);
 set(gcf,'name',['left_audio MASK-N', num2str(length(subjects))]);
 ft_sourceplot(cfg, left_visual_int_T2vsT1);
@@ -114,14 +112,13 @@ set(gcf,'name',['No-MASK-N', num2str(length(subjects))]);
 %Plot source localizations in movies and sounds conditions;
 close all;
 cfg = [];
-cfg.method = 'ortho';                   % specify the slice plot
-cfg.funparameter = 'powspctrm';         % specify the functional parameter, i.e. your power spectrum
-cfg.funcolorlim = 'maxabs';             % to plot only positive values, use 'zeromax'; for negative values, use 'minzero'
-cfg.maskparameter = 'powspctrm';        % mask values that are not of interest;
+cfg.method = 'ortho';                   
+cfg.funparameter = 'powspctrm';         
+cfg.funcolorlim = 'maxabs';             
+cfg.maskparameter = 'powspctrm';        
 cfg.opacitylim =  'zeromax'; 
-cfg.funcolormap = 'jet'; %colormap(brewermap([],'*RdBu'));
+cfg.funcolormap = 'jet'; 
 cfg.location = 'max';
-close all;
 ft_sourceplot(cfg, left_audio_T2vsT1);
 set(gcf,'name',['left_AUDIO MASK-N', num2str(length(subjects))]);
 ft_sourceplot(cfg, left_visual_T2vsT1);
@@ -140,7 +137,7 @@ left_audio_source_max_idx = left_audio_source_idx(left_audio_source_values == ma
 left_audio_source_grid = grid.pos(left_audio_source_max_idx,1:3);
 
 %Get the left visual voxels activity and their indexes, ordered;
-[left_visual_source_values, left_visual_source_idx] = sort(left_visual_T2vsT1.powspctrm,'descend'); %value = MI; idx = give the #grid corresponding to that MI value; Then go in grid.pos and find the coordinates of the source of interest;  
+[left_visual_source_values, left_visual_source_idx] = sort(left_visual_T2vsT1.powspctrm,'descend');  
 %Get the greatest source activity and its index;
 left_visual_source_max_value = max(left_visual_source_values);
 left_visual_source_max_idx = left_visual_source_idx(left_visual_source_values == max(left_visual_source_values));
@@ -148,7 +145,7 @@ left_visual_source_max_idx = left_visual_source_idx(left_visual_source_values ==
 left_visual_source_grid = grid.pos(left_visual_source_max_idx,1:3);
 
 %Get the right visual voxels activity and their indexes, ordered;
-[right_visual_source_values, right_visual_source_idx] = sort(right_visual_T2vsT1.powspctrm,'descend'); %value = MI; idx = give the #grid corresponding to that MI value; Then go in grid.pos and find the coordinates of the source of interest;  
+[right_visual_source_values, right_visual_source_idx] = sort(right_visual_T2vsT1.powspctrm,'descend'); 
 %Get the greatest source activity and its index;
 right_visual_source_max_value = max(right_visual_source_values);
 right_visual_source_max_idx = right_visual_source_idx(right_visual_source_values == max(right_visual_source_values));
@@ -160,37 +157,35 @@ right_visual_source_grid = grid.pos(right_visual_source_max_idx,1:3);
 %Plot source localizations in movies and sounds conditions;
 close all;
 cfg = [];
-cfg.method = 'ortho';                   % specify the slice plot
-cfg.funparameter = 'powspctrm';         % specify the functional parameter, i.e. your power spectrum
-cfg.funcolorlim = 'maxabs';             % to plot only positive values, use 'zeromax'; for negative values, use 'minzero'
-cfg.maskparameter = 'powspctrm';        % mask values that are not of interest;
+cfg.method = 'ortho';                   
+cfg.funparameter = 'powspctrm';        
+cfg.funcolorlim = 'maxabs';             
+cfg.maskparameter = 'powspctrm';       
 cfg.opacitylim =  'zeromax'; 
-cfg.funcolormap = 'jet'; %colormap(brewermap([],'*RdBu'));
+cfg.funcolormap = 'jet'; 
 cfg.location = 'max';
-close all;
 ft_sourceplot(cfg, no_mask_T2vsT1);
 set(gcf,'name',['right_VISUAL MASK-N', num2str(length(subjects))]);
 
 control_value = -0.241659; % <--- ENTER THE VALUE OF INTEREST;
 
-[source_values, source_idx] = sort(no_mask_T2vsT1.powspctrm,'descend'); %value = MI; idx = give the #grid corresponding to that MI value; Then go in grid.pos and find the coordinates of the source of interest;  
+[source_values, source_idx] = sort(no_mask_T2vsT1.powspctrm,'descend'); 
 [~,control_source_value] = min(pdist2(control_value, source_values));
 control_source_idx = source_idx(control_source_value);
 %Get the grid coordinates corresponding to the the source of interest;
 control_source_grid = grid.pos(control_source_idx,1:3);
 %-------------------------------------------------------------------------------------------------------------------------%
 
-
 %Now check the position of the selected ROI grids on the head model;
 close all;
 cd XXX\headmodel_mat\subj2\;
 load subj2_grid;
 cd XXX\headmodel_mat\subj2\;
-load subj2_vol
+load subj2_vol;
 
 source_grids = [left_audio_source_max_idx; left_visual_source_max_idx; right_visual_source_max_idx; control_source_idx];
-
 grid.pos = grid.pos(source_grids,:);
+
 %plot only the grid positions within the brain.
 figure;
 ft_plot_mesh(grid.pos)
