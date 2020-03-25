@@ -1,23 +1,26 @@
 %Calculate the phase information for every video stimulus (ONCE FOR ALL);
-
-clear all;clc; 
-addpath C:\toolbox\fieldtrip\
-addpath C:\toolbox\Circular_Statistics_Toolbox\;
-cd D:\Birmingham_2018\BEHAVIOR_project\ANALYSES_DATA\Signal_Infos\;
-load ('Stim_signal'); load data_template; 
+clearvars;clc; 
+addpath XXX\fieldtrip\;
+addpath XXX\Circular_Statistics_Toolbox\;
+cd XXX\Signal_Infos\;
+load Stim_signal; load data_template; 
 
 %structure signal of each video in Fieldtrip structure;
 data_mina = data_template; 
 data_mina.label = {'Video'};
 data_mina.fsample = 250;
 
-for i=1:length(dat_mina(:,1))    
+for i=1:length(dat_mina(:,1))  
+    
     data_mina.time{i,1} = 0:1/data_mina.fsample:5-1/data_mina.fsample;
     data_mina.trial{i,1} = dat_mina(i,:);
+
 end
 
 data_mina.trialinfo = [1:60]';
+
 for i=1:length(data_mina.trialinfo)
+    
         temp.trialinfo{i,1}.type = 'video';
         temp.trialinfo{i,1}.video_name = Stim_infos.VIDEO_NAME(i);
         temp.trialinfo{i,1}.name_in_task = Stim_infos.NAME_in_task(i);
@@ -77,7 +80,7 @@ Phase_mina.trial = [temp_phase_4.trial';temp_phase_5.trial';temp_phase_6.trial';
 clear temp_phase_4 temp_phase_5 temp_phase_6 temp_phase_7 temp_phase_8 temp
 
 %save everything alltogether;
-cd D:\Birmingham_2018\BEHAVIOR_project\ANALYSES_DATA\Signal_Infos\;
+cd XXX\Signal_Infos\;
 save Phase_mina Phase_mina
 
 %%
