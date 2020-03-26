@@ -1,6 +1,6 @@
 %% GENERATE PERMUTATIONS ON PHASE DATA WITH SUBSAMPLING THE NUMBER OF HITS TO THE MISS TRIALS IN EACH CONDITIONS;
 clearvars;clc;
-addpath C:\toolbox\CircHist-master; addpath C:\toolbox\Circular_Statistics_Toolbox\; addpath D:\Birmingham_2018\BEHAVIOR_project\ANALYSES_DATA\;
+addpath XXX\Circular_Statistics_Toolbox\; cd XXX\;
 
 %subjects ID;
 subjects = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29];
@@ -35,7 +35,7 @@ for s = subjects
         new_phase_analysis_2Tones_first.HIT = temp_hit2(new_conlab2);
         new_phase_analysis_2Tones_second.HIT = temp_hit3(new_conlab3);
         
-        %Generate the permutations in the 1Tone Condition;        
+        %Generate the permutations in the OneTone Condition;        
         if length(cell2mat(new_phase_analysis_1Tone.THETA_PHASE(new_phase_analysis_1Tone.HIT== 0 & new_phase_analysis_1Tone.CONDITION== 1))) < length(cell2mat(new_phase_analysis_1Tone.THETA_PHASE(new_phase_analysis_1Tone.HIT== 1 & new_phase_analysis_1Tone.CONDITION== 1)))
              perm_hit_1Tone(s,j,:) = [datasample(cell2mat(new_phase_analysis_1Tone.THETA_PHASE(new_phase_analysis_1Tone.HIT==1 & new_phase_analysis_1Tone.CONDITION== 1)),length(cell2mat(new_phase_analysis_1Tone.THETA_PHASE(new_phase_analysis_1Tone.HIT==0 & new_phase_analysis_1Tone.CONDITION== 1))),'Replace',false); NaN(300-length(cell2mat(new_phase_analysis_1Tone.THETA_PHASE((new_phase_analysis_1Tone.HIT==0 & new_phase_analysis_1Tone.CONDITION== 1)))),1)]';
              perm_miss_1Tone(s,j,:) = [cell2mat(new_phase_analysis_1Tone.THETA_PHASE(new_phase_analysis_1Tone.HIT==0 & new_phase_analysis_1Tone.CONDITION== 1)); NaN(300-length(cell2mat(new_phase_analysis_1Tone.THETA_PHASE(new_phase_analysis_1Tone.HIT==0 & new_phase_analysis_1Tone.CONDITION== 1))),1)]';
@@ -44,7 +44,7 @@ for s = subjects
              perm_miss_1Tone(s,j,:) = [cell2mat(new_phase_analysis_1Tone.THETA_PHASE(new_phase_analysis_1Tone.HIT==0 & new_phase_analysis_1Tone.CONDITION== 1)); NaN(300-length(cell2mat(new_phase_analysis_1Tone.THETA_PHASE(new_phase_analysis_1Tone.HIT==0 & new_phase_analysis_1Tone.CONDITION== 1))),1)]';
         end 
 
-        %Generate the permutations in the 2Tones-T1 Condition;    
+        %Generate the permutations in the T1 window of TwoTones Condition;    
         if length(cell2mat(new_phase_analysis_2Tones_first.THETA_PHASE(new_phase_analysis_2Tones_first.HIT== 0 & new_phase_analysis_2Tones_first.CONDITION== 2 & new_phase_analysis_2Tones_first.TONE_POSITION== 1))) < length(cell2mat(new_phase_analysis_2Tones_first.THETA_PHASE(new_phase_analysis_2Tones_first.HIT== 1 & new_phase_analysis_2Tones_first.CONDITION== 2 & new_phase_analysis_2Tones_first.TONE_POSITION== 1))) 
              perm_hit_2Tones_first(s,j,:) = [datasample(cell2mat(new_phase_analysis_2Tones_first.THETA_PHASE(new_phase_analysis_2Tones_first.HIT== 1 & new_phase_analysis_2Tones_first.CONDITION== 2 & new_phase_analysis_2Tones_first.TONE_POSITION== 1)),length(cell2mat(new_phase_analysis_2Tones_first.THETA_PHASE(new_phase_analysis_2Tones_first.HIT== 0 & new_phase_analysis_2Tones_first.CONDITION== 2 & new_phase_analysis_2Tones_first.TONE_POSITION== 1))),'Replace',false); NaN(300-length(cell2mat(new_phase_analysis_2Tones_first.THETA_PHASE((new_phase_analysis_2Tones_first.HIT== 0 & new_phase_analysis_2Tones_first.CONDITION== 2 & new_phase_analysis_2Tones_first.TONE_POSITION== 1)))),1)]';
              perm_miss_2Tones_first(s,j,:) = [cell2mat(new_phase_analysis_2Tones_first.THETA_PHASE(new_phase_analysis_2Tones_first.HIT== 0 & new_phase_analysis_2Tones_first.CONDITION== 2 & new_phase_analysis_2Tones_first.TONE_POSITION== 1)); NaN(300-length(cell2mat(new_phase_analysis_2Tones_first.THETA_PHASE(new_phase_analysis_2Tones_first.HIT== 0 & new_phase_analysis_2Tones_first.CONDITION== 2 & new_phase_analysis_2Tones_first.TONE_POSITION== 1))),1)]';  
@@ -53,7 +53,7 @@ for s = subjects
              perm_miss_2Tones_first(s,j,:) = [cell2mat(new_phase_analysis_2Tones_first.THETA_PHASE(new_phase_analysis_2Tones_first.HIT== 0 & new_phase_analysis_2Tones_first.CONDITION== 2 & new_phase_analysis_2Tones_first.TONE_POSITION== 1)); NaN(300-length(cell2mat(new_phase_analysis_2Tones_first.THETA_PHASE(new_phase_analysis_2Tones_first.HIT== 0 & new_phase_analysis_2Tones_first.CONDITION== 2 & new_phase_analysis_2Tones_first.TONE_POSITION== 1))),1)]';
         end
         
-        %Generate the permutations in the 2Tones-T2 Condition;            
+        %Generate the permutations in the T2 window of TwoTones Condition;            
          if length(cell2mat(new_phase_analysis_2Tones_second.THETA_PHASE(new_phase_analysis_2Tones_second.HIT== 0 & new_phase_analysis_2Tones_second.CONDITION== 2 & new_phase_analysis_2Tones_second.TONE_POSITION== 2))) < length(cell2mat(new_phase_analysis_2Tones_second.THETA_PHASE(new_phase_analysis_2Tones_second.HIT== 1 & new_phase_analysis_2Tones_second.CONDITION== 2 & new_phase_analysis_2Tones_second.TONE_POSITION== 2))) 
              perm_hit_2Tones_second(s,j,:) = [datasample(cell2mat(new_phase_analysis_2Tones_second.THETA_PHASE(new_phase_analysis_2Tones_second.HIT== 1 & new_phase_analysis_2Tones_second.CONDITION== 2 & new_phase_analysis_2Tones_second.TONE_POSITION== 2)),length(cell2mat(new_phase_analysis_2Tones_second.THETA_PHASE(new_phase_analysis_2Tones_second.HIT== 0 & new_phase_analysis_2Tones_second.CONDITION== 2 & new_phase_analysis_2Tones_second.TONE_POSITION== 2))),'Replace',false); NaN(300-length(cell2mat(new_phase_analysis_2Tones_second.THETA_PHASE((new_phase_analysis_2Tones_second.HIT== 0 & new_phase_analysis_2Tones_second.CONDITION== 2 & new_phase_analysis_2Tones_second.TONE_POSITION== 2)))),1)]';
              perm_miss_2Tones_second(s,j,:) = [cell2mat(new_phase_analysis_2Tones_second.THETA_PHASE(new_phase_analysis_2Tones_second.HIT== 0 & new_phase_analysis_2Tones_second.CONDITION== 2 & new_phase_analysis_2Tones_second.TONE_POSITION== 2)); NaN(300-length(cell2mat(new_phase_analysis_2Tones_second.THETA_PHASE(new_phase_analysis_2Tones_second.HIT== 0 & new_phase_analysis_2Tones_second.CONDITION== 2 & new_phase_analysis_2Tones_second.TONE_POSITION== 2))),1)]';  
@@ -67,23 +67,20 @@ for s = subjects
     
 end
 
-% cd D:\Birmingham_2018\BEHAVIOR_project\ANALYSES_DATA\;
+% cd XXX\;
 % save permutations_10000_HitvsMiss perm_hit_1Tone perm_miss_1Tone perm_hit_2Tones_first perm_miss_2Tones_first perm_hit_2Tones_second perm_miss_2Tones_second
 
-%% Now perform test statistically whether mean hit phase is greater than misses for the three conditions;
+%% Now perform test statistically whether resultant vector length of hits is greater than of misses;
 clearvars;clc;
-addpath C:\toolbox\CircHist-master; addpath C:\toolbox\Circular_Statistics_Toolbox\; addpath D:\Birmingham_2018\BEHAVIOR_project\ANALYSES_DATA\;
+addpath XXX\Circular_Statistics_Toolbox\; cd XXX\;
 load permutations_10000_HitvsMiss;
 
 
 %subjects ID;
 subjects = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29];
 
-%Make sure it is the same number used to generate the permutations before; 
-permutations = 10000;
-
 %condition to test;
-condition  = 22;
+condition  = 21;
 
 %Calculate the mean phase of each of the 10000 permutations in every participants;
 clear mean_hits mean_miss
@@ -96,14 +93,20 @@ try
         switch condition
             
             case 1
+                
+                %OneTone Condition;
                 mean_hits(s,j) = circ_mean(permute(perm_hit_1Tone(s,j,~isnan(perm_hit_1Tone(s,j,:))),[3 1 2]));
                 mean_miss(s,j) = circ_mean(permute(perm_miss_1Tone(s,j,~isnan(perm_miss_1Tone(s,j,:))),[3 1 2]));
     
             case 21
+                
+                %T1 window of TwoTones Condition; 
                 mean_hits(s,j) = circ_mean(permute(perm_hit_2Tones_first(s,j,~isnan(perm_hit_2Tones_first(s,j,:))),[3 1 2]));
                 mean_miss(s,j) = circ_mean(permute(perm_miss_2Tones_first(s,j,~isnan(perm_miss_2Tones_first(s,j,:))),[3 1 2]));
 
-            case 22        
+            case 22    
+                
+                %T2 window of TwoTones Condition; 
                 mean_hits(s,j) = circ_mean(permute(perm_hit_2Tones_second(s,j,~isnan(perm_hit_2Tones_second(s,j,:))),[3 1 2]));
                 mean_miss(s,j) = circ_mean(permute(perm_miss_2Tones_second(s,j,~isnan(perm_miss_2Tones_second(s,j,:))),[3 1 2]));
         end    
@@ -120,7 +123,7 @@ bad_subjects = [1 4 25 26 27];
 mean_hits(bad_subjects,:) = [];
 mean_miss(bad_subjects,:) = [];
 
-%now, for each mean phase permuted, perform a Rayleigh's test to get the hit/miss vector lengths(z_value);
+%now, for each mean phase permuted, perform a Rayleigh's test to get the hit/miss vector lengths(z_values);
 clear Z_hit Z_miss   
 
 for t = 1:length(mean_hits(1,:)) 
@@ -148,18 +151,24 @@ for s = subjects
     switch condition
     
         case 1
+            
+            %OneTone Condition;            
             ori_hit(s,:) = [cell2mat(PHASE_ANALYSES.THETA_PHASE(PHASE_ANALYSES.HIT==1 & PHASE_ANALYSES.CONDITION==1)); NaN(100 - length(cell2mat(PHASE_ANALYSES.THETA_PHASE(PHASE_ANALYSES.HIT==1 & PHASE_ANALYSES.CONDITION==1))),1)]';
             ori_miss(s,:) = [cell2mat(PHASE_ANALYSES.THETA_PHASE(PHASE_ANALYSES.HIT==0 & PHASE_ANALYSES.CONDITION==1)); NaN(100 - length(cell2mat(PHASE_ANALYSES.THETA_PHASE(PHASE_ANALYSES.HIT==0 & PHASE_ANALYSES.CONDITION==1))),1)]';
             ori_mean_hit(s,1) = circ_mean(ori_hit(s,~isnan(ori_hit(s,:)))');
             ori_mean_miss(s,1) = circ_mean(ori_miss(s,~isnan(ori_miss(s,:)))');
             
         case 21    
+            
+            %T1 window of TwoTones Condition; 
             ori_hit(s,:) = [cell2mat(PHASE_ANALYSES.THETA_PHASE(PHASE_ANALYSES.HIT==1 & PHASE_ANALYSES.CONDITION==2 & PHASE_ANALYSES.TONE_POSITION==1)); NaN(100 - length(cell2mat(PHASE_ANALYSES.THETA_PHASE(PHASE_ANALYSES.HIT==1 & PHASE_ANALYSES.CONDITION==2 & PHASE_ANALYSES.TONE_POSITION==1))),1)]';
             ori_miss(s,:) = [cell2mat(PHASE_ANALYSES.THETA_PHASE(PHASE_ANALYSES.HIT==0 & PHASE_ANALYSES.CONDITION==2 & PHASE_ANALYSES.TONE_POSITION==1)); NaN(100 - length(cell2mat(PHASE_ANALYSES.THETA_PHASE(PHASE_ANALYSES.HIT==0 & PHASE_ANALYSES.CONDITION==2 & PHASE_ANALYSES.TONE_POSITION==1))),1)]';
             ori_mean_hit(s,1) = circ_mean(ori_hit(s,~isnan(ori_hit(s,:)))');
             ori_mean_miss(s,1) = circ_mean(ori_miss(s,~isnan(ori_miss(s,:)))');
             
         case 22
+            
+            %T2 window of TwoTones Condition; 
             ori_hit(s,:) = [cell2mat(PHASE_ANALYSES.THETA_PHASE(PHASE_ANALYSES.HIT==1 & PHASE_ANALYSES.CONDITION==2 & PHASE_ANALYSES.TONE_POSITION==2)); NaN(100 - length(cell2mat(PHASE_ANALYSES.THETA_PHASE(PHASE_ANALYSES.HIT==1 & PHASE_ANALYSES.CONDITION==2 & PHASE_ANALYSES.TONE_POSITION==2))),1)]';
             ori_miss(s,:) = [cell2mat(PHASE_ANALYSES.THETA_PHASE(PHASE_ANALYSES.HIT==0 & PHASE_ANALYSES.CONDITION==2 & PHASE_ANALYSES.TONE_POSITION==2)); NaN(100 - length(cell2mat(PHASE_ANALYSES.THETA_PHASE(PHASE_ANALYSES.HIT==0 & PHASE_ANALYSES.CONDITION==2 & PHASE_ANALYSES.TONE_POSITION==2))),1)]';
             ori_mean_hit(s,1) = circ_mean(ori_hit(s,~isnan(ori_hit(s,:)))');
