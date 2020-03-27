@@ -1,6 +1,6 @@
 %Now let's do Phase coupling analysis between the left audio and left visual sources reconstructed (and flipped) signals;
 clearvars;clc; 
-addpath XXX\Circular_Statistics_Toolbox\;addpath XXX\CircHist-master;
+addpath XXX\Circular_Statistics_Toolbox\;
 cd XXX;
 
 %subjects ID;
@@ -189,6 +189,7 @@ delete(patience);
 close all; clear mean_alpha1 mean_alpha2 fH subAx1 subAx2;
 
 %% Plot Phase coupling in T1 and T2 time windows between left audio and left visual in Silent movie condition;
+addpath XXX\CircHist-master; %you need this toolbox for ploting the phase distribution;
 
 %convert phase radians units in degrees;
 alpha1 = circ_rad2ang(GA_T1_T2(1,:)); 
