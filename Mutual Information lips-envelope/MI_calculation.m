@@ -39,7 +39,7 @@ clearvars;close;clc;
 %Configure your path;
 cd XXX\audio\; 
 out = 'XXX\Lips_envelope_signals\';
-addpath('XXX\ChimeraSoftware'); 
+addpath('XXX\ChimeraSoftware\'); %You need to download the Chimera toolbox for matlab to compute this step;
 Folder = cd; Folder = fullfile(Folder);
 
 %Prepare the list of the stimuli to analyses; 
