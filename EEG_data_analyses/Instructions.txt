@@ -1,0 +1,8 @@
+The folder contains the mains scripts developed to analyses the eeg data and organized in steps:
+- Preprocessing from raw data to clean epoched data;
+- Individual headmodel building;
+- Mutual Information computing at source level;
+- Interpolaration to localise sources of interest (left Audio and left Visual sources);
+- Signal reconstruction procedure at the sources of interest;
+- Phase coupling analysis procedure between the two sources of interest;
+
