@@ -62,6 +62,7 @@ for i = subjects
 end
 
 %compute the dprimes;
+cd XXX\;
 hit_sum_oneTone(hit_sum_oneTone(:,:)==0) = 0.0001;
 hit_sum_oneTone(hit_sum_oneTone(:,:)==1) = 0.9999;
 hit_sum_oneTone(:,5) = dprime_simple(hit_sum_oneTone(:,1),hit_sum_oneTone(:,3));
@@ -88,7 +89,7 @@ clear TWO_TONES_ANALYSES
 count = 0;
 for s = subjects
     
-    cd(['D:\Birmingham_2018\BEHAVIOR_project\ANALYSES_DATA\subj' num2str(s)]);
+    cd(['XXX\subj' num2str(s)]);
     load(['subj' num2str(s) '-Phase_analyses']) 
     
     two_tones_temp = PHASE_ANALYSES(PHASE_ANALYSES.CONDITION ==2,:);
@@ -129,6 +130,7 @@ for i = subjects
 end
 
 %compute the dprimes;
+cd XXX\;
 hit_sum_twoTones(hit_sum_twoTones(:,:)==0) = 0.0001;
 hit_sum_twoTones(hit_sum_twoTones(:,:)==1) = 0.9999;
 hit_sum_twoTones(:,5) = dprime_simple(hit_sum_twoTones(:,1),hit_sum_twoTones(:,3));
