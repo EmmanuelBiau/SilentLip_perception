@@ -103,9 +103,10 @@ for s = subjects
     
     %--------------------------------------------------------------------------------
    
-    %Now calculate the phase angle difference between left visual and audio sources for each time-point of the chose time-window;
+    %Now calculate the phase angle difference between left visual and audio sources in movie trials for each time-point of the chose time-window;
 
     cfg = [];
+    cfg.trials = find(cell2mat(cellfun(@(x) x.condition == 2, source_audio_left.trialinfo, 'UniformOutput', false)));
     source_audio_lefth0 = ft_selectdata(cfg, source_audio_lefth);
     source_visual_lefth0 = ft_selectdata(cfg, source_visual_lefth);   
     lah = source_audio_lefth0.trial;
