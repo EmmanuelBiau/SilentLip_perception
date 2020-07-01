@@ -279,26 +279,21 @@ load FLIP_INSPECTION;
 
 %subjects ID;
 subjects = [2:9 11:17 19:26];
-
-
 for s = subjects
 
-    cd(['XXX\subj' num2str(s)]);
-    load(['source_reconstruction_subj' num2str(s)]);
+    cd (['XXX\subj' num2str(s)]);
+    load(['source_reconstruction_subj' num2str(s)])
     source_left_audio_realigned = source_audio_left;
     source_left_visual_realigned = source_visual_left;
-    source_right_visual_realigned = source_visual_left;
+    source_right_visual_realigned = source_visual_right;
     
     for i =1:length(source_left_audio_realigned.trial)
-        
-        %Multiple the eeg data at sources by 1 or -1 according to your flipping correction;
         source_left_audio_realigned.trial{i} = source_left_audio_realigned.trial{i}*FLIP_INSPECT.flip_left_audio{s}; 
         source_left_visual_realigned.trial{i} = source_left_visual_realigned.trial{i}*FLIP_INSPECT.flip_left_visual{s}; 
         source_right_visual_realigned.trial{i} = source_right_visual_realigned.trial{i}*FLIP_INSPECT.flip_right_visual{s};
 
     end
-    
-    %save the corrected source data for phase coupling analysis;   
+        
     save (['source_reconstruction_realigned_subj' num2str(s)], 'source_left_audio_realigned','source_left_visual_realigned','source_right_visual_realigned');      
         
 end
