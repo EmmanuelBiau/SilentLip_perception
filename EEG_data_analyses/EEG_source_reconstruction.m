@@ -269,7 +269,6 @@ FLIP_INSPECT_visual_entrainment.flip_left_visual{s} = flip_lv;
 FLIP_INSPECT_visual_entrainment.flip_right_visual{s} =flip_rv;
 save FLIP_INSPECTION FLIP_INSPECT;
 
-    
 %% Now Flip the source data by 1 or -1 to correct the dipole directionality;
 clearvars;clc;
 cd XXX\;
@@ -277,15 +276,13 @@ load FLIP_INSPECTION;
 
 %subjects ID;
 subjects = [2:9 11:17 19:26];
-
-
 for s = subjects
 
     cd (['XXX\subj' num2str(s)]);
     load(['source_reconstruction_subj' num2str(s)])
     source_left_audio_realigned = source_audio_left;
     source_left_visual_realigned = source_visual_left;
-    source_right_visual_realigned = source_visual_left;
+    source_right_visual_realigned = source_visual_right;
     
     for i =1:length(source_left_audio_realigned.trial)
         source_left_audio_realigned.trial{i} = source_left_audio_realigned.trial{i}*FLIP_INSPECT.flip_left_audio{s}; 
