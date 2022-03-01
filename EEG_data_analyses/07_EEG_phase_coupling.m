@@ -105,7 +105,6 @@ for s = subjects
     %--------------------------------------------------------------------------------
    
     %Now calculate the phase angle difference between left visual and audio sources for each time-point of the chose time-window;
-
     cfg = [];
     cfg.trials = find(cell2mat(cellfun(@(x) x.condition == 2, source_audio_lefth.trialinfo, 'UniformOutput', false)));
     source_audio_lefth0 = ft_selectdata(cfg, source_audio_lefth);
@@ -113,15 +112,14 @@ for s = subjects
     lah = source_audio_lefth0.trial;
     lvh = source_visual_lefth0.trial;
 
-    %Chose the time-windows of interest:
-    
+    %Chose the time-windows of interest:    
     t1_start = 0.5;
     t1_end = 2;
     
     t2_start = 3;
     t2_end = 4.5;
     
-    fs = source_audio_lefth.fsample; %sample of data (512Hz);  
+    fs = source_audio_lefth.fsample; %sample of data (500Hz);  
     tw1 = fs*(2+t1_start)+1:fs*(2+t1_end)+1; 
     tw2 = fs*(2+t2_start)+1:fs*(2+t2_end)+1;  
 
@@ -279,7 +277,6 @@ y2 = linspace(0.74,0.74);
 plot(x2,y2, 'Color', [0 0 0],'LineWidth',0.5);
 text(1.25,0.745,'*','FontSize', 20,'FontWeight','light');
 set(gcf,'color','w','Positio',[674 546 329 420]);
-
    
 %% Convert the mean distance phase-coupling to zeros in time;
 cd XXX\;

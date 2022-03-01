@@ -96,7 +96,6 @@ clearvars;clc;
 %subjects ID;
 subjects = [2:9 11:17 19:26];
 
-
 for s = subjects
    
     cd (['XXX\subj' num2str(s)]);

@@ -32,7 +32,6 @@ clearvars;clc; addpath XXX\fieldtrip;
 %subject ID;
 subjects = [2];  
 
-
 for s = subjects
     
     raw_dir = ['XXX\subj_', num2str(s)];
