@@ -1,0 +1,6 @@
+These folder contains: 
+
+1) the codes to analyse participants performances in the Tone Detection Task (TDT): Dprime, False Alarm and Reaction Times;
+2) The codes to analyse entrainment to theta activity in the silent movies conveyed by lips movements;
+
+

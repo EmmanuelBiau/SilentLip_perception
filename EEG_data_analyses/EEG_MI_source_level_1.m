@@ -90,7 +90,7 @@ clearvars -except subjects
 end
 
 %% Sort/prepare the epochs according to the corresponding Lips movement signal;
-clear; clc; 
+clearvars; clc; 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %--------------------PREPARE SUBJECT'S TRIALS ---------------%
@@ -155,7 +155,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %---------------------- NOW WE CAN PERFORM MI CALCULATIONS AT SOURCE LEVEL - T1 Time-window --------------------------%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-clear; clc; addpath XXX\AV_info_stimuli\gauss_info\; addpath XXX\AV_info_stimuli\gauss_info\mex\;
+clearvars; clc; addpath XXX\AV_info_stimuli\gauss_info\; addpath XXX\AV_info_stimuli\gauss_info\mex\;
 
 
 %subjects ID;
@@ -286,7 +286,7 @@ subjects = [2:9 11:17 19:26];
 for s = subjects 
 
 cd(['XXX\subj',num2str(s)])    
-load(['subj',num2str(s),'_movie_source']);  
+load(['subj',num2str(s),'_source_movie_cut']);  
 
 %Now we calculate the MI between Movies and source epochs; Load your lips signal here;
 stim_info_dir = 'XXX\AV_info_stimuli\';

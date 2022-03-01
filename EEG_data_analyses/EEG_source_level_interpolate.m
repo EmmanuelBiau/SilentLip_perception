@@ -33,30 +33,28 @@ cfg = [];
 cfg.parameter = 'powspctrm';
 GA_source_mina = ft_freqgrandaverage(cfg,allsource_MI_mina{:});
 
-% Load mri template from FT and the grid template from one participant (e.g. subj2);
+%Load mri template from FT and the grid template from one participant (e.g. subj2);
 cd XXX\fieldtrip\template\headmodel;
 load standard_mri;
 cd XXX\headmodel_mat\subj2\;
 load subj2_grid;
 
-% Using template grid;
+%Using template grid;
 sourceTmpl = [];
 sourceTmpl.inside = grid.inside;
 sourceTmpl.dim = grid.dim;
 sourceTmpl.pos = grid.pos;
 sourceTmpl.unit = grid.unit;
 
-% Apply this source 'template' to sound and movie data and mask the data;
-%No-MASK;
+%Apply this source 'template' to sound and movie data and mask the data;
 no_mask_T2vsT1 = sourceTmpl;
 no_mask_T2vsT1.powspctrm = nan(size(grid.pos,1),1); 
 no_mask_T2vsT1.powspctrm(sourceTmpl.inside)= GA_source_mina.powspctrm;
 
 %Interpolate the parameter 'pow';
 cfg = [];
-cfg.downsample = 2; % downsample the MRI resolution by 2 (i.e. half the resolution)
+cfg.downsample = 2; 
 cfg.parameter = 'powspctrm';
-%sounds;
 no_mask_int_T2vsT1 = ft_sourceinterpolate(cfg, no_mask_T2vsT1, mri); 
 
 %Plot source localizations in movies and sounds conditions;
@@ -105,7 +103,7 @@ close all;
 cd XXX\headmodel_mat\subj2\;
 load subj2_grid;
 cd XXX\headmodel_mat\subj2\;
-load subj2_vol
+load subj2_vol;
 
 source_grids = [value_of_interest_idx_grid];
 

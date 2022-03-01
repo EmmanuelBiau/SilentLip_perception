@@ -1,0 +1,6 @@
+Thes lips and audio signals are the same used for the MI detection before; 
+Only that the names are changed because the videos were ordered by frequency of MI peak for the experiment (cf. MI detection codes) and I stuck 
+to theses for the MI analyses between eeg epochs and silent movies;
+But the "video_info" or "stim_freqpeak" .mat give you the original name of each video (that I used initially for the stimuli analyses) and its theta 
+frequency of MI peak between lips-envelope;
+No way to get completely lost;

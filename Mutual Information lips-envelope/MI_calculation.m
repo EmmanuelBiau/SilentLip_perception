@@ -7,7 +7,7 @@ out = 'XXX\Lips_envelope_signals\';
 Folder = cd; Folder = fullfile(Folder);
 
 %Prepare the list of the stimuli to analyses; 
-list_v = dir('Stat_video*.mat');
+list_v = dir('Stat_video_*.mat');
 clear list_v_num
 
 for a = 1:length(list_v)  
@@ -20,7 +20,7 @@ end
 for s = newnum
 
     %Load valid videos (with good lip detection);
-    load(fullfile(Folder,['Stat_video', num2str(s)]), 'Stat');
+    load(fullfile(Folder,['Stat_video_', num2str(s)]), 'Stat');
 
     %Resample area, major and minor axe information;
     fps = 25;
@@ -39,7 +39,7 @@ clearvars;close;clc;
 %Configure your path;
 cd XXX\audio\; 
 out = 'XXX\Lips_envelope_signals\';
-addpath('XXX\ChimeraSoftware'); 
+addpath('XXX\ChimeraSoftware\'); %You need to download the Chimera toolbox for matlab to compute this step;
 Folder = cd; Folder = fullfile(Folder);
 
 %Prepare the list of the stimuli to analyses; 
@@ -90,10 +90,10 @@ clear; clc;
 addpath XXX\gauss_info\; addpath XXX\gauss_info\mex\;
 addpath XXX\fieldtrip\;ft_defaults 
 
-%Prepare the list of the stimuli to analyses; 
 cd XXX\Lips_envelope_signals\;
 Folder = cd; Folder = fullfile(Folder);
 
+%Prepare the list of the stimuli to analyses; 
 list_v = dir('Info_lips_*.mat');
 list_a = dir('Info_audio_*.mat');
 clear list_v_num
@@ -212,7 +212,7 @@ mi_mina_original(mi_mina_original < 0) = 0.00001;
 
 %% PEAK DETECTION;
 
-%Prepare the list of the stimuli to analyses; 
+%adapt paths;
 cd XXX\Lips_envelope_signals\;
 peak_figure = 'XXX\figures_MI_peaks\'; 
 Folder = cd; Folder = fullfile(Folder);
