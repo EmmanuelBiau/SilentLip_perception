@@ -29,6 +29,7 @@ y = linspace(0,0);
 % plot(x,y,'linewidth',1,'color',[0.5 0.5 0.5],'linestyle', '--');
 hold on
 
+%plot individuals dots (participants) in each conditions;
 for k=1:ncond
     tmp=dat(:,k);
     jitt=(rand(1,length(tmp))+0.2).*0.2;
@@ -65,7 +66,7 @@ for plt=1:ncond
     hold on
     
     % Plot Error bars for 90th percentile
-    pct = prctile(dat(:,plt),[5 95]);
+    pct = prctile(dat(:,plt),[5 95]);    
     x = linspace(xbr(1,1)+plt,xbr(1,2)+plt)-1;
     y = linspace(pct(1),pct(1));
     % draw lower bound
