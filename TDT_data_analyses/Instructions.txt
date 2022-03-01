@@ -2,4 +2,4 @@ These folder contains:
 
 1) the codes to analyse participants performances in the Tone Detection Task (TDT): Dprime, False Alarm and Reaction Times;
 2) The codes to analyse entrainment to theta activity in the silent movies conveyed by lips movements;
-3) For storage limitation purpose, the ".mat" files of permutations are on the corresponding osf repository (https://osf.io/fma3z/);
+3) For storage limitation purpose, the ".mat" files of permutations will be sent upon request - Otherwise, the scripts show how to generate them directly;
